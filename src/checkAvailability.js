@@ -17,24 +17,20 @@ exports.checkVaccineAvailabilityFor = async function (userInput) {
     for (let date of dateList) {
         let key = date.split('-')[0] + " " + monthList[date.split('-')[1] - 1] + " " + date.split('-')[2];
         let response = await invokeAppointmentApiFor(userInput.pincode, date);
-        if (response['centers']) {
-            if (response['centers'].length > 0) {
-                let availableCenters = [];
-                for (let center of response['centers']) {
-                    if (center.sessions[0].min_age_limit <= userInput.age && center.sessions[0].available_capacity != 0) {
-                        availableCenters.push(center);
-                    }
+        if (response['centers'] && response['centers'].length > 0) {
+            let availableCenters = [];
+            for (let center of response['centers']) {
+                if (center.sessions[0].min_age_limit <= userInput.age && center.sessions[0].available_capacity != 0) {
+                    availableCenters.push(center);
                 }
-                if (availableCenters.length != 0) {
-                    apiResponse[key] = availableCenters;
-                } else {
-                    apiResponse[key] = "No Slots Available";
-                }
+            }
+            if (availableCenters.length != 0) {
+                apiResponse[key] = availableCenters;
             } else {
                 apiResponse[key] = "No Slots Available";
             }
         } else {
-            apiResponse[key] = response;
+            apiResponse[key] = "No Slots Available";
         }
     }
     return apiResponse;
@@ -58,7 +54,7 @@ function getNext20Days() {
 
 async function invokeAppointmentApiFor(pincode, date) {
     let APPOINTMENT = API_ENDPOINT + "?pincode=" + pincode + "&date=" + date + "&q=" + generateUniqueId();
-    console.log("Final URL : ", APPOINTMENT);
+    //console.log("Final URL : ", APPOINTMENT);
     let apiResponse = await fetch(APPOINTMENT, {
         headers: HEADERS
     });
