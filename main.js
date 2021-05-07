@@ -5,10 +5,14 @@ const notify = require("./src/notifyUser");
 async function main() {
     console.log("Covid Vaccination Notifier - Would periodically check vaccine availability & based on the current availability, desktop notification would be sent.");
     let userInput = await userinput.fetchUserInput();
-    console.log(" User Input :", JSON.stringify(userInput, null, 2));
+    //console.log(" User Input :", JSON.stringify(userInput, null, 2));
     let response = await vaccineslots.checkVaccineAvailabilityFor(userInput);
-    console.log(" API Response :", JSON.stringify(response, null, 2));
-    notify.send();
+    //console.log(" API Response :", JSON.stringify(response, null, 2));
+    let messageResponse = vaccineslots.createNotificationMessage(response);
+    console.log(messageResponse);
+    if (messageResponse != '') {
+        notify.send(messageResponse);
+    }
 }
 
 main().then(() => { });

@@ -54,7 +54,6 @@ function getNext20Days() {
 
 async function invokeAppointmentApiFor(pincode, date) {
     let APPOINTMENT = API_ENDPOINT + "?pincode=" + pincode + "&date=" + date + "&q=" + generateUniqueId();
-    //console.log("Final URL : ", APPOINTMENT);
     let apiResponse = await fetch(APPOINTMENT, {
         headers: HEADERS
     });
@@ -70,4 +69,18 @@ function generateUniqueId() {
         return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
     });
     return uuid;
+}
+
+exports.createNotificationMessage = function(responseObj) {
+    let notificationMessage = "";
+    if (responseObj) {
+        Object.entries(responseObj).forEach(([key, value]) => {
+            if (value !== "No Slots Available") {
+                notificationMessage += "\nDate : " + key + "\nCenter Name : " + value[0].name +
+                    "\nAddress : " + value[0].address + "\nCapacity : " + value[0].sessions[0].available_capacity +
+                    "\nVaccine : " + value[0].sessions[0].vaccine;
+            }
+        });
+    }
+    return notificationMessage;
 }
