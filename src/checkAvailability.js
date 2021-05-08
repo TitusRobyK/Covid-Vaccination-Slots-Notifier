@@ -78,7 +78,7 @@ exports.createNotificationMessage = function(responseObj) {
             if (value !== "No Slots Available") {
                 notificationMessage += "\nDate : " + key + "\nCenter Name : " + value[0].name +
                     "\nAddress : " + value[0].address + "\nCapacity : " + value[0].sessions[0].available_capacity +
-                    "\nVaccine : " + value[0].sessions[0].vaccine;
+                    "\nVaccine : " + value[0].sessions[0].vaccine + "\n";
             }
         });
     }

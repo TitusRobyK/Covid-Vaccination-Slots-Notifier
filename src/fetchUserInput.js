@@ -3,7 +3,7 @@ const inquirer = require('inquirer');
 const emailValidator = require("email-validator");
 
 exports.fetchUserInput = async function () {
-    console.log('Hi, Initializing..');
+    console.log('Hi, Initializing.. \n');
     let questions = [
         {
             type: 'input',
@@ -40,7 +40,7 @@ exports.fetchUserInput = async function () {
     if (answers.isEmailNotificationRequired) {
         answers["emailDetails"] = await fetchEmailSetupDetails();
     }
-    console.log(' Thank you for your response , The App will run in background..');
+    console.log('\nThank you for your response , The App will run in background..');
     return answers;
 }
 
@@ -49,7 +49,7 @@ async function fetchEmailSetupDetails() {
         {
             type: 'list',
             name: 'mailservice',
-            message: "Input the Mail Service ",
+            message: "Input the Mail Service  >",
             choices: ['Gmail'],
             filter: function (val) {
                 return val.toLowerCase();
@@ -58,12 +58,12 @@ async function fetchEmailSetupDetails() {
         {
             type: 'input',
             name: 'smtpHost',
-            message: "Enter the SMTP Host ?",
+            message: "Input the SMTP Host  >",
         },
         {
             type: 'input',
             name: 'authUserName',
-            message: "Input Email Service Auth User ",
+            message: "Input Email Service Auth User  >",
             validate: function (value) {
                 var pass = emailValidator.validate(value);
                 if (pass) {
@@ -75,13 +75,13 @@ async function fetchEmailSetupDetails() {
         {
             type: 'password',
             name: 'authPassword',
-            message: "Input Email Service Auth Password ",
+            message: "Input Email Service Auth Password  >",
             mask: '*'
         },
         {
             type: 'input',
             name: 'recieverMailId',
-            message: "Input Email to which Vaccine Notification Needs to be sent..",
+            message: "Input Email to which Vaccine Notification Needs to be sent > ",
             validate: function (value) {
                 var pass = emailValidator.validate(value);
                 if (pass) {
