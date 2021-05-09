@@ -1,8 +1,11 @@
 {
-  "name": "covid-vaccination-slots-notifier",
-  "version": "1.0.0",
+  "name": "covid-vaccine-slots-notifier",
+  "version": "2.0.0",
   "description": "Utility that would run in background to check vaccination slots availability",
   "main": "main.js",
+  "bin": {
+    "covid-vaccine-slots-notifier": "./bin/index.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

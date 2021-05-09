@@ -1,6 +1,6 @@
-const userinput = require("./src/fetchUserInput");
-const vaccineslots = require("./src/checkAvailability");
-const notify = require("./src/notifyUser");
+const userinput = require("./lib/fetchUserInput");
+const vaccineslots = require("./lib/checkAvailability");
+const notify = require("./lib/notifyUser");
 const cron = require('node-schedule');
 
 async function main() {
