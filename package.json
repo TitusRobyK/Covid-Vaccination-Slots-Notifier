@@ -1,6 +1,6 @@
 {
   "name": "covid-vaccine-slots-notifier",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Utility that would run in background to check vaccination slots availability",
   "main": "main.js",
   "bin": {
